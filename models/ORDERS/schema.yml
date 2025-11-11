@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: bigquery_raw
+    schema: staging        # change to your dataset name
+    tables:
+      - name: orders
+
+models:
+  - name: transformed_orders
+    description: "Orders transformed table"
+    columns:
+      - name: order_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+    config:
+      materialized: table
+      alias: orders_report
